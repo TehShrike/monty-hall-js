@@ -1,0 +1,8 @@
+{
+  "name": "monty-hall",
+  "description": "An implementation of a Monty Hall game!",
+  "version": "0.0.1",
+  "dependencies": {
+    "hrandom": "~1.0.0"
+  }
+}
