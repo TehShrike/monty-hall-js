@@ -16,22 +16,25 @@ module.exports = function newGame() {
 
 	return function pickDoor(playersPick) {
 		var game_state = {}
+		var opened_door = pickDifferentDoor(carIsBehindDoor, playersPick)
 		
 		game_state.makeFinalChoice = function(finalChoice) {
 			game_state.won = finalChoice === carIsBehindDoor
 			delete game_state.makeFinalChoice
+			delete game_state.switchDoors
+			delete game_state.dontSwitch
 			return game_state.won
 		}
 
 		game_state.switchDoors = function() {
-			return game_state.makeFinalChoice(pickDifferentDoor(playersPick, game_state.openedDoor))
+			return game_state.makeFinalChoice(pickDifferentDoor(playersPick, opened_door))
 		}
 
 		game_state.dontSwitch = function() {
 			return game_state.makeFinalChoice(playersPick)
 		}
 
-		game_state.openedDoor = pickDifferentDoor(carIsBehindDoor, playersPick)
+		game_state.opened_door = opened_door
 
 		return game_state
 	}
